@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💌 Valentine?</title>
+  <style>
+    :root{
+      --bg1:#ffe6f2;
+      --bg2:#fff7fb;
+      --card:#ffffffcc;
+      --text:#3b2b3a;
+      --yes:#ff5fa2;
+      --no:#7a6b7a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:grid;
+      place-items:center;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 20%, #ffd1e7 0 25%, transparent 26%),
+        radial-gradient(circle at 80% 30%, #ffe0ef 0 22%, transparent 23%),
+        radial-gradient(circle at 60% 80%, #ffeef7 0 28%, transparent 29%),
+        linear-gradient(135deg, var(--bg1), var(--bg2));
+      overflow:hidden;
+    }
+    .card{
+      width:min(560px, 92vw);
+      padding:28px 22px;
+      border-radius:24px;
+      background:var(--card);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.12);
+      text-align:center;
+      position:relative;
+      z-index: 1;
+    }
+    .sparkle{
+      position:absolute;
+      inset:-30px;
+      pointer-events:none;
+      opacity:.55;
+      filter: blur(.2px);
+      z-index: 0;
+    }
+    h1{
+      margin: 0 0 10px;
+      font-size: clamp(26px, 4vw, 36px);
+      letter-spacing: .2px;
+      position: relative;
+      z-index: 1;
+    }
+    p{
+      margin: 8px 0 0;
+      font-size: 16px;
+      line-height:1.35;
+      position: relative;
+      z-index: 1;
+    }
+    .sub{
+      opacity:.9;
+      margin-top:10px;
+    }
+
+    /* embedded video card */
+    .side-video{
+      margin: 18px auto 10px;
+      width: 190px;
+      background: rgba(255,255,255,.92);
+      border-radius: 18px;
+      padding: 8px;
+      box-shadow: 0 14px 28px rgba(0,0,0,.18);
+      transform: rotate(-2deg);
+      position: relative;
+      z-index: 1;
+      animation: float 4s ease-in-out infinite;
+    }
+    .side-video video{
+      width: 100%;
+      aspect-ratio: 2 / 3;
+      object-fit: cover;
+      border-radius: 14px;
+      display: block;
+    }
+    .side-video .caption{
+      margin-top: 6px;
+      font-size: 12px;
+      opacity: .72;
+      font-weight: 650;
+    }
+    @keyframes float{
+      0%{ transform: rotate(-2deg) translateY(0); }
+      50%{ transform: rotate(-2deg) translateY(-6px); }
+      100%{ transform: rotate(-2deg) translateY(0); }
+    }
+    @media (max-width: 520px){
+      .side-video{ width: 150px; }
+    }
+
+    .buttons{
+      margin-top:16px;
+      display:flex;
+      gap:14px;
+      justify-content:center;
+      align-items:center;
+      flex-wrap:wrap;
+      position: relative;
+      z-index: 1;
+    }
+    button{
+      border:0;
+      cursor:pointer;
+      border-radius:999px;
+      padding: 14px 20px;
+      font-size: 18px;
+      font-weight: 700;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.12);
+      transition: transform .15s ease, box-shadow .15s ease, opacity .15s ease, translate .18s ease;
+      user-select:none;
+    }
+    button:active{ transform: translateY(1px) scale(.98); }
+    .yes{
+      background: linear-gradient(180deg, #ff76b5, var(--yes));
+      color:white;
+    }
+    .no{
+      background: linear-gradient(180deg, #eee, #d8d0d8);
+      color:#3b2b3a;
+    }
+    .emoji{
+      font-size: 20px;
+      line-height:1;
+    }
+    .result{
+      margin-top:18px;
+      font-size: 18px;
+      font-weight: 700;
+      min-height: 28px;
+      position: relative;
+      z-index: 1;
+    }
+    .tiny-note{
+      margin-top:8px;
+      font-size: 13px;
+      opacity:.7;
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <svg class="sparkle" viewBox="0 0 600 260" aria-hidden="true">
+      <g fill="#ff7fb9" opacity=".25">
+        <path d="M85 70c-12-20-44-10-44 13 0 28 44 46 44 46s44-18 44-46c0-23-32-33-44-13z"/>
+        <path d="M520 90c-10-16-36-8-36 11 0 23 36 38 36 38s36-15 36-38c0-19-26-27-36-11z"/>
+        <path d="M320 200c-14-22-50-11-50 15 0 31 50 51 50 51s50-20 50-51c0-26-36-37-50-15z"/>
+      </g>
+    </svg>
+
+    <h1>💌 Will you be my Valentine?</h1>
+    <p class="sub">And will you let me take you to boba on me? 🧋✨</p>
+
+    <div class="side-video">
+      <video autoplay muted loop playsinline>
+        <source src="assets/background.mp4" type="video/mp4">
+      </video>
+      <div class="caption">our boba era 🧋💖</div>
+    </div>
+
+    <div class="buttons">
+      <button id="yesBtn" class="yes" type="button">
+        <span class="emoji">💖</span>
+        Yes!!
+      </button>
+
+      <button id="noBtn" class="no" type="button">
+        <span class="emoji">🙈</span>
+        No
+      </button>
+    </div>
+
+    <div id="result" class="result"></div>
+    <div class="tiny-note">Tip: Try clicking “No” 😌</div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn  = document.getElementById("noBtn");
+    const result = document.getElementById("result");
+
+    // button scales
+    let yesScale = 1.0;
+    let noScale  = 1.0;
+
+    // NEW: accumulate a little "run away" offset for No
+    let noDx = 0;
+    let noDy = 0;
+
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+    // NEW: random cute reactions (#5)
+    const reactions = [
+      "Hmm… think again 😌",
+      "Waittt 🥺",
+      "You sure sure? 💗",
+      "Okay but boba though 🧋✨",
+      "No is getting shy… 🙈",
+      "My heart says yes 💖",
+      "Be honest… you want boba 😭🧋",
+      "I’ll be extra nice 😇"
+    ];
+    const pickReaction = () => reactions[Math.floor(Math.random() * reactions.length)];
+
+    // NEW: apply scale + translate together (so they don't overwrite each other)
+    const applyTransforms = () => {
+      yesBtn.style.transform = `scale(${yesScale})`;
+      noBtn.style.transform  = `translate(${noDx}px, ${noDy}px) scale(${noScale})`;
+      noBtn.style.opacity = String(clamp(noScale, 0.25, 1));
+    };
+
+    // yes goes to celebration
+    yesBtn.addEventListener("click", () => {
+      window.location.href = "celebration.html";
+    });
+
+    // No shrinks + dodges (#4) + reaction line (#5)
+    noBtn.addEventListener("click", () => {
+      // scales
+      yesScale *= 1.10;
+      noScale  *= 0.90;
+
+      noScale  = clamp(noScale, 0.15, 1.0);
+      yesScale = clamp(yesScale, 1.0, 3.0);
+
+      // NEW: dodge movement
+      // smaller buttons dodge less, so it doesn't fly away too hard
+      const maxStep = 18 * clamp(noScale, 0.35, 1);
+      const dx = (Math.random() - 0.5) * maxStep * 2; // ~[-maxStep, maxStep]
+      const dy = (Math.random() - 0.5) * maxStep * 1.2;
+
+      noDx = clamp(noDx + dx, -80, 80);
+      noDy = clamp(noDy + dy, -60, 60);
+
+      // update UI
+      result.textContent = pickReaction();
+      applyTransforms();
+    });
+
+    applyTransforms();
+  </script>
+</body>
+</html>
